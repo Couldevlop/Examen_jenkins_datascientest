@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: '*/**', url: 'https://github.com/DataScientest/Jenkins_devops_exams.git'
+                git branch: 'master', url: 'https://github.com/DataScientest/Jenkins_devops_exams.git'
             }
         }
 
