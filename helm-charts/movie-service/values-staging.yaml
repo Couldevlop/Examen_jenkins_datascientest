@@ -1,0 +1,14 @@
+replicaCount: 3
+
+image:
+  repository: thomcoul/movie_service
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8000
+
+env:
+  DATABASE_URI: "postgresql://movie_db_username:movie_db_password@movie_db/movie_db_staging"
+  CAST_SERVICE_HOST_URL: "http://cast_service:8000/api/v1/casts/"
