@@ -1,5 +1,5 @@
 version: '3.7'
-
+#test
 services:
   movie_service:
     build: ./movie-service
