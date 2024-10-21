@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
     kompose.version: 1.21.0 (992df58d8)
-  creationTimestamp: null
   labels:
     io.kompose.service: movie-service
   name: movie-service
@@ -20,7 +19,6 @@ spec:
       annotations:
         kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
         kompose.version: 1.21.0 (992df58d8)
-      creationTimestamp: null
       labels:
         io.kompose.service: movie-service
     spec:
@@ -38,8 +36,8 @@ spec:
           value: http://cast_service:8000/api/v1/casts/
         - name: DATABASE_URI
           value: postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev
-        image: movie-service
-        imagePullPolicy: ""
+        image: movie-service:latest  # Spécifie ici l'image avec son tag
+        imagePullPolicy: IfNotPresent  # Change à Always si nécessaire
         name: movie-service
         ports:
         - containerPort: 8000
@@ -53,4 +51,6 @@ spec:
       - name: movie-service-claim0
         persistentVolumeClaim:
           claimName: movie-service-claim0
+      imagePullSecrets:  # Ajout du secret pour extraire l'image depuis un registre privé
+      - name: regcred    # Ce doit être le nom du secret que tu as créé pour accéder au registre Docker
 status: {}
