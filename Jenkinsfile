@@ -15,7 +15,7 @@ pipeline {
         stage('Build and Push Docker Images') {
             steps {
                 script {
-                    // Utiliser docker.build pour créer les images
+                    // Utiliser docker.build pour créer toutes les images
                     def dockerImageMovie = docker.build("${DOCKER_IMAGE_MOVIE_SERVICE}:${env.BRANCH_NAME}", "movie-service")
                     def dockerImageCast = docker.build("${DOCKER_IMAGE_CAST_SERVICE}:${env.BRANCH_NAME}", "cast-service")
                     
