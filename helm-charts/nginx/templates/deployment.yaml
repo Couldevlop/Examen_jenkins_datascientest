@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: { { .Values.replicaCount } }
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: nginx
@@ -18,7 +18,7 @@ spec:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: { { .Values.service.port } }
+            - containerPort: {{ .Values.service.port }}
           volumeMounts:
             - name: proxy-config
               mountPath: "{{ .Values.proxyConfig }}"
