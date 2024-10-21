@@ -4,6 +4,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'dockerhub_credentials'
         DOCKER_IMAGE_MOVIE_SERVICE = 'thomcoul/movie_service'
         DOCKER_IMAGE_CAST_SERVICE = 'thomcoul/cast_service'
+        KUBECONFIG = "${WORKSPACE}/k3s.yaml" // Utilise le chemin de travail de Jenkins
     }
 
     stages {
