@@ -15,9 +15,11 @@ pipeline {
         stage('Build and Push Docker Images') {
             steps {
                 script {
-                    dockerImageMovie = docker.build("${DOCKER_IMAGE_MOVIE_SERVICE}:${env.BRANCH_NAME}", "movie-service")
-                    dockerImageCast = docker.build("${DOCKER_IMAGE_CAST_SERVICE}:${env.BRANCH_NAME}", "cast-service")
+                    // Utiliser docker.build pour créer les images
+                    def dockerImageMovie = docker.build("${DOCKER_IMAGE_MOVIE_SERVICE}:${env.BRANCH_NAME}", "movie-service")
+                    def dockerImageCast = docker.build("${DOCKER_IMAGE_CAST_SERVICE}:${env.BRANCH_NAME}", "cast-service")
                     
+                    // Pusher les images vers Docker Hub
                     docker.withRegistry('', "${DOCKER_CREDENTIALS_ID}") {
                         dockerImageMovie.push()
                         dockerImageCast.push()
