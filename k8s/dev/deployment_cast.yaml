@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
     kompose.version: 1.21.0 (992df58d8)
-  creationTimestamp: null
   labels:
     io.kompose.service: cast-service
   name: cast-service
@@ -20,7 +19,6 @@ spec:
       annotations:
         kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
         kompose.version: 1.21.0 (992df58d8)
-      creationTimestamp: null
       labels:
         io.kompose.service: cast-service
     spec:
@@ -36,8 +34,8 @@ spec:
         env:
         - name: DATABASE_URI
           value: postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev
-        image: cast-service
-        imagePullPolicy: ""
+        image: cast-service:latest  # Assure-toi de spécifier le tag de l'image
+        imagePullPolicy: IfNotPresent  # Peut être Always si tu veux forcer l'extraction
         name: cast-service
         ports:
         - containerPort: 8000
@@ -51,4 +49,6 @@ spec:
       - name: cast-service-claim0
         persistentVolumeClaim:
           claimName: cast-service-claim0
+      imagePullSecrets:  # Ajoute cette section ici pour gérer les credentials Docker
+      - name: regcred    # Regcred est le secret pour accéder au registre Docker privé
 status: {}
